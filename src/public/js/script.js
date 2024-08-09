@@ -41,6 +41,7 @@ const shorten = (input) => {
     shortUrl.innerHTML = "Please wait...";
     showResult()
     const userId = localStorage.getItem("user_id")
+    console.log(userId);
     fetch("/shorten-url", {
         method: "POST",
         headers: {
