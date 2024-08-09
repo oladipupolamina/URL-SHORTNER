@@ -49,7 +49,7 @@ const shorten = (input) => {
         },
         body: JSON.stringify({
             "url": input,
-            "userId": userId
+            "userId": userId ?? ""
         }),
     })
     .then(handleError)
