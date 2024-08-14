@@ -20,7 +20,8 @@ app.post("/shorten-url", async (req, res) => {
     let {url, userId} = req.body;
     const schema = Joi.object({
         url: Joi.string().required().uri(),
-        userId: Joi.string()
+        userId: Joi.string(),
+        domain: Joi.string().required()
     })
     const { error, value } = schema.validate(req.body);
     if (error != null) {
@@ -47,7 +48,8 @@ app.post("/shorten-url", async (req, res) => {
                 originalUrl: value.url,
                 shortUrl: `${host}/${code}`,
                 code: code,
-                userId: userId
+                userId: userId,
+                domain: value.domain
             }
         })
     }

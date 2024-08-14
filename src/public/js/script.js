@@ -1,6 +1,9 @@
+import { custom } from "joi";
+
 const token = "503bf5006708dc769617c571f07206858ef8c018";
 const button = document.querySelector("#shorten");
 const input = document.querySelector("#input-field");
+const customDomain = document.querySelector("#domain-field");
 const longUrl = document.querySelector("#input-url");
 const shortUrl = document.querySelector("#new-url");
 const resultDiv = document.querySelector("#output-div")
@@ -13,8 +16,8 @@ const shortHistoryList = document.querySelector("#short-history");
 /* button action */
 button.addEventListener("click", (event) => {
   event.preventDefault();
-  if(input.value) {
-    shorten(input.value);
+  if(input.value && customDomain.value) {
+    shorten(input.value, customDomain.value);
   } else {
     showError();
     hideResult();
@@ -36,7 +39,7 @@ const handleError = (response) => {
 }
 
 /* function to get shortened url with input "url" with fetch and deal with error */
-const shorten = (input) => {
+const shorten = (input, domain) => {
     // console.log(input)
     shortUrl.innerHTML = "Please wait...";
     showResult()
@@ -50,7 +53,8 @@ const shorten = (input) => {
         },
         body: JSON.stringify({
             "url": input,
-            "userId": userId == null ? "" : userId
+            "domain": domain,
+            "userId": userId == null ? "" : userId,
         }),
     })
     .then(handleError)

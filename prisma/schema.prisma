@@ -20,6 +20,7 @@ model History {
   originalUrl String
   shortUrl String
   code String
+  domain String @default("")
 
   userId String?
 
